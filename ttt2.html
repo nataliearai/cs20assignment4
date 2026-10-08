@@ -1,0 +1,83 @@
+<!-- 
+    Natalie Arai
+    CS20 Assignment 4: Tic Tac Toe 
+    ttt2.html - Part 2 of the Tic Tac Toe assignment to build the board using JavaScript; 
+                also adds a title, an area to display whose turn it is, and a win message
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CS20 Assignment 4: Tic Tac Toe</title>
+        <style type="text/css">
+            /* build the board as a flex container that wraps 3 squares per row */
+            #board {
+                display: flex;
+                flex-wrap: wrap;
+                /* 3 squares * (100 px + 10 px margin) */
+                width: 330px;
+            }
+            /* style for each individual square on the board (matching assignment requirements) */
+            .square {
+                background-color: #ffffff;
+                border: solid 1px #000000;
+                width: 100px;
+                height: 100px;
+                
+                /* adds a margin space between squares */
+                margin: 5px;
+                
+                /* make sure that the border is included within the 100px square size*/ 
+                box-sizing: border-box;
+                
+                /* manages the X and O letters in the squares */
+                font-family: Arial, sans-serif;
+                font-size: 80px;
+                text-align: center;
+                line-height: 98px;
+            }
+            /* highlights a square when the user hovers over it */
+            .square:hover {
+                background-color: #B2BEB5;
+            }
+            /* create message areas for the turn and win messages */
+            #turn, #win {
+                width: 330px;
+                border: solid 2px #000000;
+                padding: 10px;
+                margin: 10px 0;
+                box-sizing: border-box;
+                font-family: Arial, sans-serif;
+                text-align: center;
+            }
+        </style>
+        <script>
+            // when the page loads, place an X in upper right square and an O in left middle square
+            window.onload = function()
+            {
+                // squares are numbered 0 - 8, left to right, top to bottom
+                document.getElementById("sq2").innerHTML = "X";
+                document.getElementById("sq3").innerHTML = "O";
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Tic Tac Throwdown</h1>
+        <!-- shows whose turn it is -->
+        <div id="turn">X's turn</div>
+
+         <!-- displays the board as a 3x3 grid of squares-->
+        <div id="board">
+            <script>
+                // required code from assignment
+                const NUM_SQUARES = 9;
+                for (i=0; i<NUM_SQUARES; i++)
+                {
+                    id = "sq" + i;
+                    document.write("<div class='square' id='" + id + "'></div>");
+                }
+            </script>
+        </div>
+        <!-- shows the win or stalemate message -->
+        <div id="win">Game in progress</div>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!-- 
+    Natalie Arai
+    CS20 Assignment 4: Tic Tac Toe 
+    ttt1.html - Part 1 of the Tic Tac Toe assignment to build the board with HTML and CSS
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CS20 Assignment 4: Tic Tac Toe</title>
+        <style type="text/css">
+            /* create a 3-by-3 grid for the tic tac toe board */
+            .grid-container {
+                display: grid;
+                grid-template-columns: repeat(3, 110px);
+                grid-template-rows: repeat(3, 110px);
+            }
+            /* style for each individual square on the board (matching assignment requirements) */
+            .square {
+                background-color: #ffffff;
+                border: solid 1px #000000;
+                width: 100px;
+                height: 100px;
+                
+                /* adds a margin space between squares */
+                margin: 5px;
+                
+                /* make sure that the border is included within the 100px square size*/ 
+                box-sizing: border-box;
+                
+                /* manages the X and O letters in the squares */
+                font-family: Arial, sans-serif;
+                font-size: 80px;
+                text-align: center;
+                line-height: 98px;
+            }
+            /* highlights a square when the user hovers over it */
+            .square:hover {
+                background-color: #B2BEB5;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- nine squares arranged in a 3 x 3 grid -->
+        <div class="grid-container">
+            <div class="square">X</div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square">O</div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square">X</div>
+        </div>
+    </body>
+</html>

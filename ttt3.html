@@ -1,0 +1,160 @@
+<!-- 
+    Natalie Arai
+    CS20 Assignment 4: Tic Tac Toe 
+    ttt3.html - Part 3 of the Tic Tac Toe assignment to implement click handlers, alternative 
+    turns, picking a random first player, and a start game button
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CS20 Assignment 4: Tic Tac Toe</title>
+        <style type="text/css">
+            /* build the board as a flex container that wraps 3 squares per row */
+            #board {
+                display: flex;
+                flex-wrap: wrap;
+                /* 3 squares * (100 px + 10 px margin) */
+                width: 330px;
+            }
+            /* style for each individual square on the board (matching assignment requirements) */
+            .square {
+                background-color: #ffffff;
+                border: solid 1px #000000;
+                width: 100px;
+                height: 100px;
+                
+                /* adds a margin space between squares */
+                margin: 5px;
+                
+                /* make sure that the border is included within the 100px square size*/ 
+                box-sizing: border-box;
+                
+                /* manages the X and O letters in the squares */
+                font-family: Arial, sans-serif;
+                font-size: 80px;
+                text-align: center;
+                line-height: 98px;
+            }
+            /* highlights a square when the user hovers over it */
+            .square:hover {
+                background-color: #B2BEB5;
+            }
+            /* create message areas for the turn and win messages */
+            #turn, #win {
+                width: 330px;
+                border: solid 2px #000000;
+                padding: 10px;
+                margin: 10px 0;
+                box-sizing: border-box;
+                font-family: Arial, sans-serif;
+                text-align: center;
+            }
+            /* add a start game button that easy to see and click */
+            #startButton {
+                font-size: 18px;
+                padding: 8px 20px;
+            }
+        </style>
+        <script>
+            // when the page loads, place an X in upper right square and an O in left middle square
+            window.onload = function()
+            {
+                // squares are numbered 0 - 8, left to right, top to bottom
+                document.getElementById("sq2").innerHTML = "X";
+                document.getElementById("sq3").innerHTML = "O";
+            }
+
+            var currentPlayer = "X"; // the player whose turn it is
+            var gameActive = false; // squares can only be changed/filled after the game begins
+
+            // add another handler
+            window.addEventListener("load", setupGame);
+
+            // function setupGame: attaches one click handler function to all 9 squares 
+            // and attaches the handler for the start game button
+            function setupGame()
+            {
+                var squares = document.getElementsByClassName("square");
+                for (var i = 0; i < squares.length; i++)
+                {
+                    squares[i].onclick = squareClicked;
+                }
+                document.getElementById("startButton").onclick = startGame;
+                document.getElementById("turn").innerHTML = "Press Start Game to play";
+            }
+
+            // function startGame: clears the board and randomly picks the first player; 
+            // allows squares to start being filled
+            function startGame()
+            {
+                var squares = document.getElementsByClassName("square");
+                for (var i = 0; i < squares.length; i++)
+                {
+                    squares[i].innerHTML = ""; //empties every square
+                }
+
+                // get a random number for the starting player
+                if (Math.random() < 0.5)
+                    currentPlayer = "X";
+                else
+                    currentPlayer = "O";
+
+                // make sure the game is active and squares can be clicked
+                gameActive = true;
+                showTurn();
+                document.getElementById("win").innerHTML = "Game in progress";
+            }
+
+            // function showTurn: displays whose turn it is in the message area above the board
+            function showTurn()
+            {
+                document.getElementById("turn").innerHTML = currentPlayer + "'s turn";
+            }
+
+            // functon squareClicked: runs when any square is clicked
+            function squareClicked()
+            {
+                if (!gameActive) // game has not started yet, so cannot be clicked
+                    return;
+                if (this.innerHTML != "") // square is already taken, so cannot be clicked
+                    return;
+
+                this.innerHTML = currentPlayer; // places an X or O depending on the player's turn
+
+                // the id is sq0 through sq8 so the character at index 2 is the square's number
+                var squareNumber = this.id.charAt(2);
+                alert("You clicked square " + squareNumber);
+
+                //switch to the next player
+                if (currentPlayer == "X")
+                    currentPlayer = "O";
+                else
+                    currentPlayer = "X";
+                showTurn();
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Tic Tac Throwdown</h1>
+        <!-- shows whose turn it is -->
+        <div id="turn">X's turn</div>
+
+         <!-- displays the board as a 3x3 grid of squares-->
+        <div id="board">
+            <script>
+                // required code from assignment
+                const NUM_SQUARES = 9;
+                for (i=0; i<NUM_SQUARES; i++)
+                {
+                    id = "sq" + i;
+                    document.write("<div class='square' id='" + id + "'></div>");
+                }
+            </script>
+        </div>
+        <!-- shows the win or stalemate message -->
+        <div id="win">Game in progress</div>
+
+        <!-- start game button -->
+        <input type="button" value="Start Game" id="startButton">
+    </body>
+</html>
